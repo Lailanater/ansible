@@ -1,0 +1,12 @@
+- name: Main
+  hosts: localhost
+  become: true
+  tasks:
+    - name:
+      community.general.pacman:
+        upgrade: true
+        update_cache: true
+    - include_tasks:
+        file:
+          - tasks/gaming.yml
+          - tasks/1password.yml

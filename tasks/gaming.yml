@@ -1,0 +1,5 @@
+- name: Install gaming libraries
+  community.general.pacman:
+    name:
+      - cachyos-gaming-meta
+    state: present
