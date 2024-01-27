@@ -6,7 +6,7 @@
       community.general.pacman:
         upgrade: true
         update_cache: true
-      include_tasks: "{{ item }}"
+    - include_tasks: "{{ item }}"
       loop:
         - tasks/1password.yml
         - tasks/gaming.yml
