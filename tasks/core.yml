@@ -1,0 +1,8 @@
+- name: Install gaming libraries
+  community.general.pacman:
+    name:
+      - discord-screenaudio
+      - partition-manager
+      - easyeffects
+      - grub-customizer
+    state: present

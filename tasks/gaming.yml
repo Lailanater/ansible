@@ -2,4 +2,7 @@
   community.general.pacman:
     name:
       - cachyos-gaming-meta
+      - heroic-games-launcher
+      - bottles
+      - solaar
     state: present
