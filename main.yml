@@ -2,15 +2,11 @@
   hosts: localhost
   become: true
   tasks:
-    - block:
-        - name: Upgrade/update pacman
-          community.general.pacman:
-            upgrade: true
-            update_cache: true
-      become_user: root
-    - block:
-        - include_tasks: "{{ item }}"
-          loop:
-            - tasks/1password.yml
-            - tasks/gaming.yml
-      become_user: clail
+    - name: Upgrade/update pacman
+      community.general.pacman:
+        upgrade: true
+        update_cache: true
+      include_tasks: "{{ item }}"
+      loop:
+        - tasks/1password.yml
+        - tasks/gaming.yml
