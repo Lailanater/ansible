@@ -5,4 +5,11 @@
       - partitionmanager
       - easyeffects
       - grub-customizer
+      - stow
+      - alacritty
+      - neovim
     state: present
+  community.general.pacman:
+    name:
+      - cachy-browser
+    state: absent
