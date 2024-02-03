@@ -8,6 +8,7 @@
       - stow
       - alacritty
       - neovim
+      - btop
     state: present
   community.general.pacman:
     name:
