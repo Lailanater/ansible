@@ -5,4 +5,14 @@
       - partitionmanager
       - easyeffects
       - grub-customizer
+      - stow
     state: present
+
+- name: Set zsh as default shell
+  shell: chsh -s /bin/zsh
+- name: Install oh-my-zsh
+  shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
+- name: Stow my files
+  shell: cd $HOME && git clone https://github.com/Lailanater/dotfiles.git && stow */
+- name: Install powerlevel10k
+  shell: git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k 
