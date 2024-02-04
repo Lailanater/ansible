@@ -20,6 +20,7 @@
       - polkit-kde-agent
       - qt5-wayland
       - qt6-wayland
+      - qt6ct
       - intellij-idea-ultimate-edition
       - ttf-jetbrains-mono-nerd
       - exa
@@ -29,6 +30,8 @@
       - tidal-hifi-bin
       - lsp-plugins
       - pavucontrol
+      - cliphist
+      - octopi
     state: present
 
 - name: Remove default libraries
@@ -36,4 +39,5 @@
     name:
       - kitty
       - dunst
+      - wofi
     state: absent
