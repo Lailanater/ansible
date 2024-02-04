@@ -27,6 +27,8 @@
       - mako
       - waybar
       - tidal-hifi-bin
+      - lsp-plugins
+      - pavucontrol
     state: present
 
 - name: Remove default libraries
