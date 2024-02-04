@@ -32,6 +32,7 @@
       - pavucontrol
       - cliphist
       - octopi
+      - ark
     state: present
 
 - name: Remove default libraries
