@@ -33,6 +33,8 @@
       - cliphist
       - octopi
       - ark
+      - xorg-xhost
+      - signal-desktop
     state: present
 
 - name: Remove default libraries
