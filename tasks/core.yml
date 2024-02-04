@@ -1,7 +1,7 @@
 - name: Install core libraries
   community.general.pacman:
     name:
-      - discord-screenaudio
+      - vencord
       - partitionmanager
       - easyeffects
       - grub-customizer
@@ -9,8 +9,22 @@
       - alacritty
       - neovim
       - btop
+      - firefox
+      - git
+      - base-devel
+      - snapper
+      - btrfs-assistant
+      - zsh
+      - pipewire
+      - wireplumber
+      - polkit-kde-agent
+      - qt5-wayland
+      - qt6-wayland
+      - intellij-idea-ultimate-edition
     state: present
+
+- name: Remove default libraries
   community.general.pacman:
     name:
-      - cachy-browser
+      - kitty
     state: absent

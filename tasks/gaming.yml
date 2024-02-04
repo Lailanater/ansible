@@ -1,8 +1,11 @@
 - name: Install gaming libraries
   community.general.pacman:
     name:
-      - cachyos-gaming-meta
       - heroic-games-launcher
       - bottles
       - solaar
+      - lib32-vulkan-radeon
+      - steam
+      - mangohud
+      - gamemode
     state: present
