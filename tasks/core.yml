@@ -21,10 +21,17 @@
       - qt5-wayland
       - qt6-wayland
       - intellij-idea-ultimate-edition
+      - ttf-jetbrains-mono-nerd
+      - exa
+      - neofetch
+      - mako
+      - waybar
+      - tidal-hifi-bin
     state: present
 
 - name: Remove default libraries
   community.general.pacman:
     name:
       - kitty
+      - dunst
     state: absent
