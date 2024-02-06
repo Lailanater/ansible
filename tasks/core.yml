@@ -35,6 +35,8 @@
       - ark
       - xorg-xhost
       - signal-desktop
+      - otf-font-awesome
+      - hyprshot
     state: present
 
 - name: Remove default libraries
