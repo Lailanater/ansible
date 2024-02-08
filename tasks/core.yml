@@ -46,6 +46,7 @@
       - tumbler
       - obs-studio
       - vlc
+      - man-db
     state: present
 
 - name: Remove default libraries
