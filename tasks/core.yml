@@ -10,6 +10,7 @@
       - neovim
       - btop
       - firefox
+      - hunspell-en_US
       - git
       - base-devel
       - snapper
