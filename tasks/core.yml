@@ -37,6 +37,10 @@
       - signal-desktop
       - otf-font-awesome
       - hyprshot
+      - mkinitcpio-firmware
+      - python-pywal
+      - swww
+      - python-pywalfox
     state: present
 
 - name: Remove default libraries
