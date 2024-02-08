@@ -44,6 +44,8 @@
       - thunar
       - gvfs
       - tumbler
+      - obs-studio
+      - vlc
     state: present
 
 - name: Remove default libraries
