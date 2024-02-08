@@ -41,6 +41,9 @@
       - python-pywal
       - swww
       - python-pywalfox
+      - thunar
+      - gvfs
+      - tumbler
     state: present
 
 - name: Remove default libraries
@@ -49,4 +52,5 @@
       - kitty
       - dunst
       - wofi
+      - dolphin
     state: absent
