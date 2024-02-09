@@ -48,6 +48,8 @@
       - obs-studio
       - vlc
       - man-db
+      - jdk-openjdk
+      - plasma-systemmonitor
     state: present
 
 - name: Remove default libraries
@@ -57,4 +59,5 @@
       - dunst
       - wofi
       - dolphin
+      - htop
     state: absent
