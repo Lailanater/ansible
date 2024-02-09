@@ -49,7 +49,14 @@
       - vlc
       - man-db
       - jdk-openjdk
-      - plasma-systemmonitor
+      - gnome-themes-extra
+      - noto-fonts
+      - noto-fonts-cjk
+      - noto-fonts-emoji
+      - noto-fonts-extra
+      - ksysguard
+      - plymouth
+      - plymouth-theme-arch-os
     state: present
 
 - name: Remove default libraries
