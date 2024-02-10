@@ -57,6 +57,10 @@
       - ksysguard
       - plymouth
       - plymouth-theme-arch-os
+      - starship
+      - rofi-emoji
+      - zsh-autosuggetions
+      - zsh-syntax-highlighting
     state: present
 
 - name: Remove default libraries
