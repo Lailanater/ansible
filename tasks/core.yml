@@ -39,7 +39,7 @@
       - otf-font-awesome
       - hyprshot
       - mkinitcpio-firmware
-      - python-pywal
+      - pywal-git
       - swww
       - python-pywalfox
       - thunar
@@ -62,6 +62,7 @@
       - rofi-emoji
       - zsh-autosuggetions
       - zsh-syntax-highlighting
+      - papirus-icon-theme
     state: present
 
 - name: Remove default libraries
