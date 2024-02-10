@@ -51,6 +51,7 @@
       - jdk-openjdk
       - gnome-themes-extra
       - noto-fonts
+      - ttf-noto-nerd
       - noto-fonts-cjk
       - noto-fonts-emoji
       - noto-fonts-extra
