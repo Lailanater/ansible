@@ -60,9 +60,11 @@
       - plymouth-theme-arch-os
       - starship
       - rofi-emoji
-      - zsh-autosuggetions
+      - zsh-autosuggestions
       - zsh-syntax-highlighting
       - papirus-icon-theme
+      - swaylock
+      - wlogout
     state: present
 
 - name: Remove default libraries

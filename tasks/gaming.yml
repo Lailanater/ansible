@@ -7,5 +7,6 @@
       - lib32-vulkan-radeon
       - steam
       - mangohud
+      - gamescope
       - gamemode
     state: present
