@@ -1,10 +1,9 @@
 - name: Install gaming libraries
-  community.general.pacman:
+  community.general.zypper:
     name:
       - heroic-games-launcher
       - bottles
       - solaar
-      - lib32-vulkan-radeon
       - steam
       - mangohud
       - gamescope

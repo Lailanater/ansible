@@ -3,7 +3,7 @@
   become: true
   tasks:
     - name: Upgrade/update pacman
-      community.general.pacman:
+      community.general.zypper:
         upgrade: true
         update_cache: true
     - include_tasks: "{{ item }}"

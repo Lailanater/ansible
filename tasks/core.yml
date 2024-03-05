@@ -1,78 +1,35 @@
 - name: Install core libraries
-  community.general.pacman:
+  community.general.zypper:
     name:
-      - vencord
-      - partitionmanager
       - easyeffects
-      - grub-customizer
       - stow
       - alacritty
       - neovim
       - btop
       - firefox
-      - hunspell-en_US
       - git
       - base-devel
-      - snapper
-      - btrfs-assistant
       - zsh
-      - pipewire
-      - wireplumber
-      - polkit-kde-agent
-      - qt5-wayland
-      - qt6-wayland
-      - qt6ct
-      - intellij-idea-ultimate-edition
-      - ttf-jetbrains-mono-nerd
-      - exa
+      - eza
       - neofetch
       - mako
       - waybar
-      - tidal-hifi-bin
-      - lsp-plugins
-      - pavucontrol
-      - cliphist
-      - octopi
-      - ark
-      - xorg-xhost
       - signal-desktop
-      - otf-font-awesome
-      - hyprshot
-      - mkinitcpio-firmware
-      - pywal-git
       - swww
-      - python-pywalfox
-      - thunar
-      - gvfs
-      - tumbler
       - obs-studio
-      - vlc
-      - man-db
-      - jdk-openjdk
-      - gnome-themes-extra
-      - noto-fonts
-      - ttf-noto-nerd
-      - noto-fonts-cjk
-      - noto-fonts-emoji
-      - noto-fonts-extra
-      - ksysguard
-      - plymouth
-      - plymouth-theme-arch-os
       - starship
       - rofi-emoji
       - zsh-autosuggestions
       - zsh-syntax-highlighting
-      - papirus-icon-theme
       - swaylock
       - wlogout
+      - opi
     state: present
 
 - name: Remove default libraries
-  community.general.pacman:
+  community.general.zypper:
     name:
       - kitty
       - dunst
       - wofi
-      - dolphin
-      - htop
     state: absent
