@@ -25,6 +25,7 @@
 - block:
     - name: Set zsh as default shell
       shell: sudo chsh -s $(which zsh)
+      become_user: root
 
 - block:
     - name: Execute stow
