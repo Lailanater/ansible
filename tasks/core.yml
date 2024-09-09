@@ -28,5 +28,9 @@
       become_user: root
 
 - block:
-    - name: Execute stow
-      shell: cd $HOME && git clone https://github.com/Lailanater/dotfiles.git && cd dotfiles && stow */
+    - name: Clone dotfiles
+      ansible.builtin.git:
+        repo: https://github.com/Lailanater/dotfiles.git
+        dest: /home/clail/dotfiles
+    - name: Stow dotfiles
+      shell: cd $HOME/dotfiles && stow */
