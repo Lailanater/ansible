@@ -9,5 +9,6 @@
     - include_tasks: "{{ item }}"
       loop:
         - tasks/core.yml
+        - tasks/flatpak.yml
         - tasks/1password.yml
         - tasks/gaming.yml

@@ -1,0 +1,13 @@
+- name: Install flatpaks
+  community.general.flatpak:
+    name:
+      - ch.protonmail.protonmail-bridge
+      - com.github.tchx84.Flatseal
+      - com.heroicgameslauncher.hgl
+      - com.mastermindzh.tidal-hifi
+      - com.usebottles.bottles
+      - dev.vencord.Vesktop
+      - net.davidotek.pupgui2
+      - org.prismlauncher.PrismLauncher
+      - org.freedesktop.Platform.VulkanLayer.MangoHud
+    state: present
