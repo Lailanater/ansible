@@ -20,4 +20,12 @@
 
 - block:
     - name: Install opi libraries
-      shell: opi -n codecs
+      shell: opi -n -m codecs zsh-completions zsh-autosuggestions
+
+- block:
+    - name: Set zsh as default shell
+      shell: sudo chsh -s $(which zsh)
+
+- block:
+    - name: Execute stow
+      shell: git clone https://github.com/Lailanater/dotfiles.git && cd dotfiles && stow */
