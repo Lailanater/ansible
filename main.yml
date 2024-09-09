@@ -2,10 +2,9 @@
   hosts: localhost
   become: true
   tasks:
-    - name: Upgrade/update pacman
+    - name: Dist Upgrade
       community.general.zypper:
-        upgrade: true
-        update_cache: true
+        state: dist-upgrade
     - include_tasks: "{{ item }}"
       loop:
         - tasks/core.yml

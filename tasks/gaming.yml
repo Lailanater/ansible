@@ -1,9 +1,6 @@
 - name: Install gaming libraries
   community.general.zypper:
     name:
-      - heroic-games-launcher
-      - bottles
-      - solaar
       - steam
       - mangohud
       - gamescope

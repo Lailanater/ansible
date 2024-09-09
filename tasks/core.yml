@@ -1,35 +1,32 @@
-- name: Install core libraries
-  community.general.zypper:
-    name:
-      - easyeffects
-      - stow
-      - alacritty
-      - neovim
-      - btop
-      - firefox
-      - git
-      - base-devel
-      - zsh
-      - eza
-      - neofetch
-      - mako
-      - waybar
-      - signal-desktop
-      - swww
-      - obs-studio
-      - starship
-      - rofi-emoji
-      - zsh-autosuggestions
-      - zsh-syntax-highlighting
-      - swaylock
-      - wlogout
-      - opi
-    state: present
+- block:
+    - name: Install core libraries
+      community.general.zypper:
+        name:
+          - easyeffects
+          - stow
+          - alacritty
+          - neovim
+          - btop
+          - firefox
+          - git
+          - base-devel
+          - zsh
+          - eza
+          - neofetch
+          - mako
+          - waybar
+          - signal-desktop
+          - swww
+          - obs-studio
+          - starship
+          - rofi-emoji
+          - zsh-autosuggestions
+          - zsh-syntax-highlighting
+          - swaylock
+          - wlogout
+          - opi
+        state: present
 
-- name: Remove default libraries
-  community.general.zypper:
-    name:
-      - kitty
-      - dunst
-      - wofi
-    state: absent
+- block:
+    - name: Install opi libraries
+      shell: opi codecs
