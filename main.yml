@@ -4,6 +4,7 @@
   tasks:
     - name: Dist Upgrade
       community.general.zypper:
+        name: '*'
         state: dist-upgrade
     - include_tasks: "{{ item }}"
       loop:

@@ -9,24 +9,13 @@
           - btop
           - firefox
           - git
-          - base-devel
           - zsh
           - eza
           - neofetch
-          - mako
-          - waybar
-          - signal-desktop
-          - swww
-          - obs-studio
           - starship
-          - rofi-emoji
-          - zsh-autosuggestions
-          - zsh-syntax-highlighting
-          - swaylock
-          - wlogout
           - opi
         state: present
 
 - block:
     - name: Install opi libraries
-      shell: opi codecs
+      shell: opi -n codecs

@@ -4,5 +4,4 @@
       - steam
       - mangohud
       - gamescope
-      - gamemode
     state: present
