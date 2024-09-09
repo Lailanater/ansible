@@ -9,5 +9,4 @@
       - dev.vencord.Vesktop
       - net.davidotek.pupgui2
       - org.prismlauncher.PrismLauncher
-      - org.freedesktop.Platform.VulkanLayer.MangoHud
     state: present
