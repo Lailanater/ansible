@@ -20,7 +20,7 @@
 
 - block:
     - name: Install opi libraries
-      shell: opi -n -m codecs zsh-completions zsh-autosuggestions
+      shell: opi -n -m codecs zsh-completions zsh-autosuggestions signal-desktop obs-studio google-chrome-stable
 
 - block:
     - name: Set zsh as default shell
