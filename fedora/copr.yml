@@ -1,0 +1,27 @@
+- name: Copr
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Enable Lazygit
+      community.general.copr:
+        host: copr.fedorainfracloud.org
+        state: enabled
+        name: atim/lazygit
+    - name: Enable Ghostty
+      community.general.copr:
+        host: copr.fedorainfracloud.org
+        state: enabled
+        name: pgdev/ghostty
+    - name: Enable WezTerm
+      community.general.copr:
+        host: copr.fedorainfracloud.org
+        state: enabled
+        name: wezfurlong/wezterm-nightly
+
+    - name: Install enabled software
+      dnf5:
+        name:
+          - lazygit
+          - ghostty
+          - wezterm
+        state: present

@@ -8,6 +8,7 @@
         update_only: true
 
 - import_playbook: dnf.yml
+- import_playbook: copr.yml
 - import_playbook: flatpak.yml
 - import_playbook: 1password.yml
 - import_playbook: volta.yml
