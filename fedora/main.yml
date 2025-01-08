@@ -1,0 +1,17 @@
+- name: Fedora
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Upgrade/update dnf
+      dnf5:
+        update_cache: true
+        update_only: true
+
+- import_playbook: dnf.yml
+- import_playbook: flatpak.yml
+- import_playbook: 1password.yml
+- import_playbook: volta.yml
+- import_playbook: starship.yml
+- import_playbook: zsh.yml
+- import_playbook: vesktop.yml
+- import_playbook: dots.yml

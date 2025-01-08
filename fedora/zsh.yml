@@ -1,0 +1,7 @@
+- name: Zsh
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Set ZSH as default shell
+      shell:
+        cmd: "chsh -s /bin/zsh"

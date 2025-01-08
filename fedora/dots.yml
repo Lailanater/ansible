@@ -1,0 +1,12 @@
+- name: Dotfiles
+  hosts: localhost
+  tasks:
+    - name: Clone dotfiles if it does not exist already
+      git:
+        repo: "https://www.github.com/lailanater/dotfiles.git"
+        dest: "~/dotfiles"
+
+    - name: Stow files
+      command:
+        cmd: ./fedora-kde
+        chdir: "~/dotfiles"

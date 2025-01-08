@@ -1,0 +1,7 @@
+- name: Install Starship
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Install Starship
+      shell:
+        cmd: "curl -sS https://starship.rs/install.sh | sh -s -- -y"

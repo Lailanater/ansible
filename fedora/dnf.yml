@@ -1,0 +1,21 @@
+- name: Fedora
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Install programs from dnf
+      dnf5:
+        name:
+          - steam
+          - fastfetch
+          - neovim
+          - gh
+          - git
+          - stow
+          - btop
+          - easyeffects
+          - mangohud
+          - gamemode
+          - solaar
+          - zsh
+          - eza
+        state: present

@@ -1,0 +1,20 @@
+- name: Download Vesktop
+  hosts: localhost
+  tasks:
+    - name: Download Vesktop
+      command:
+        cmd: wget -O ~/Downloads/vesktop.rpm https://vencord.dev/download/vesktop/amd64/rpm
+
+    - name: Get user home
+      set_fact:
+        user_home: "{{ ansible_env.HOME }}"
+
+- name: Download Vesktop
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Install Vesktop
+      dnf5:
+        name: "{{ user_home }}/Downloads/vesktop.rpm"
+        state: present
+        disable_gpg_check: true

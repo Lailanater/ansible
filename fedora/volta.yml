@@ -1,0 +1,10 @@
+- name: Install Volta
+  hosts: localhost
+  tasks:
+    - name: Install Volta
+      shell:
+        cmd: "curl https://get.volta.sh | bash"
+
+    - name: Install Node & PNPM
+      command:
+        cmd: volta install node pnpm

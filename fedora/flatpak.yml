@@ -1,0 +1,18 @@
+- name: Flatpak
+  hosts: localhost
+  tasks:
+    - name: Install programs from Flatpak
+      community.general.flatpak:
+        name:
+          - com.github.tchx84.Flatseal
+          - com.heroicgameslauncher.hgl
+          - com.mastermindzh.tidal-hifi
+          - com.usebottles.bottles
+          - net.davidotek.pupgui2
+          - org.cryptomator.Cryptomator
+          - org.prismlauncher.PrismLauncher
+          - runtime/org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/24.08
+          - runtime/org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/23.08
+          - runtime/org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/23.08
+          - runtime/org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/24.08
+        state: present
