@@ -4,4 +4,4 @@
   tasks:
     - name: Set ZSH as default shell
       shell:
-        cmd: "chsh -s /bin/zsh {{ ansible_env.USER }}"
+        cmd: "chsh -s /bin/zsh {{ user_name }}"

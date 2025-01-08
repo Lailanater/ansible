@@ -1,3 +1,11 @@
+- name: Set Facts
+  hosts: localhost
+  tasks:
+    - name: Get user info
+      set_fact:
+        user_home: "{{ ansible_env.HOME }}"
+        user_name: "{{ ansible_env.USER }}"
+
 - name: Fedora
   hosts: localhost
   become: true
