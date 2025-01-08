@@ -4,7 +4,12 @@
   tasks:
     - name: Upgrade/update dnf
       dnf:
-        upgrade: true
-        update_cache: true
+        name:
+            - steam
+            - fastfetch
+            - neovim
+            - gh
+            - git
+        state: present
 
 - import_playbook: dnf_programs.yml
