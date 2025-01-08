@@ -7,4 +7,4 @@
 
     - name: Install Node & PNPM
       command:
-        cmd: volta install node pnpm
+        cmd: ~/.volta/bin/volta install node pnpm
