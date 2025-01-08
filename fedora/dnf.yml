@@ -21,6 +21,9 @@
           - golang
           - zsh-autosuggestions
           - zsh-syntax-highlighting
+          - google-chrome-stable
+          - audacity
+          - vlc
         state: present
 
     - name: Set default yes in dnf.conf

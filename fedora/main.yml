@@ -8,6 +8,7 @@
         update_only: true
 
 - import_playbook: dnf.yml
+- import_playbook: rpm-fusion.yml
 - import_playbook: copr.yml
 - import_playbook: flatpak.yml
 - import_playbook: steam.yml
@@ -16,4 +17,5 @@
 - import_playbook: starship.yml
 - import_playbook: zsh.yml
 - import_playbook: vesktop.yml
+- import_playbook: virtualization.yml
 - import_playbook: dots.yml

@@ -1,0 +1,21 @@
+- name: Edit Steam config
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Install virtualization group
+      dnf5:
+        name: "@virtualization"
+        state: present
+
+    - name: Start libvirtd
+      command: systemctl start libvirtd
+
+    - name: Enable libvirtd
+      command: systemctl enable libvirtd
+
+    - name: Fix VM internet (https://www.reddit.com/r/Fedora/comments/1ggvck8/fedora_41_connectivity_issues_with_virtual/)
+      lineinfile:
+        path: /etc/libvirt/network.conf
+        regex: ^firewall_backend
+        line: 'firewall_backend = "iptables"'
+        backup: true
