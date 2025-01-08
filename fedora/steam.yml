@@ -1,0 +1,30 @@
+- name: Edit Steam config
+  hosts: localhost
+  tasks:
+    - name: Run Steam
+      shell: steam &
+
+    - name: Wait 5 seconds for init
+      wait_for:
+        timeout: 5
+
+    - name: Kill Steam
+      shell: pkill steam
+      ignore_errors: true
+
+    - name: Fix steam download speed
+      lineinfile:
+        path: "{{ ansible_env.HOME }}/.steam/steam/steam_dev.cfg"
+        search_string: "@nClientDownloadEnableHTTP2PlatformLinux"
+        line: "@nClientDownloadEnableHTTP2PlatformLinux 0"
+        create: true
+
+    - name: Get number of threads
+      command: nproc
+      register: nproc_output
+
+    - name: Enable shaders to use all cores
+      lineinfile:
+        path: "{{ ansible_env.HOME }}/.steam/steam/steam_dev.cfg"
+        search_string: "unShaderBackgroundProcessingThreads"
+        line: "unShaderBackgroundProcessingThreads {{ nproc_output.stdout }}"

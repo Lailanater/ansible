@@ -5,6 +5,10 @@
       command:
         cmd: wget -O ~/Downloads/vesktop.rpm https://vencord.dev/download/vesktop/amd64/rpm
 
+    - name: Get user info
+      set_fact:
+        user_home: "{{ ansible_env.HOME }}"
+
 - name: Install Vesktop
   hosts: localhost
   become: true
@@ -14,3 +18,11 @@
         name: "{{ user_home }}/Downloads/vesktop.rpm"
         state: present
         disable_gpg_check: true
+
+- name: Create Vesktop theme folder
+  hosts: localhost
+  tasks:
+    - name: Ensure folder exists
+      file:
+        path: "{{ user_home }}/.config/vesktop/themes"
+        state: directory
