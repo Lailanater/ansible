@@ -22,3 +22,11 @@
           - zsh-autosuggestions
           - zsh-syntax-highlighting
         state: present
+
+    - name: Set default yes in dnf.conf
+      lineinfile:
+        path: /etc/dnf/dnf.conf
+        search_string: "defaultyes="
+        line: "defaultyes=True"
+        state: present
+        backup: true
