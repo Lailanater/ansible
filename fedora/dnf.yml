@@ -14,6 +14,8 @@
           - btop
           - easyeffects
           - mangohud
+          - docker
+          - docker-compose
           - gamemode
           - solaar
           - zsh
