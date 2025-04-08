@@ -1,0 +1,18 @@
+- hosts: localhost
+  tasks:
+    - name: Get user info
+      set_fact:
+        user_name: "{{ ansible_env.USER }}"
+
+- name: Feral Gamemode Configuration
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Add user to the gamemode group
+      raw: sudo usermod -aG gamemode {{ user_name }}
+
+    - name: Allow larger renice values
+      lineinfile:
+        path: /etc/security/limits.d/10-gamemode.conf
+        regexp: "@gamemode - nice"
+        line: "@gamemode - nice -19"
