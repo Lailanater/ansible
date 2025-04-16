@@ -1,16 +1,10 @@
 - name: Edit Steam config
   hosts: localhost
   tasks:
-    - name: Run Steam
-      shell: steam &
-
-    - name: Wait 5 seconds for init
-      wait_for:
-        timeout: 5
-
-    - name: Kill Steam
-      shell: pkill steam
-      ignore_errors: true
+    - name: Make sure steam has started once to generate config files
+      shell: timeout 8 steam
+      register: result
+      failed_when: result.rc != 124
 
     - name: Fix steam download speed
       lineinfile:
