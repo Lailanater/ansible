@@ -11,6 +11,7 @@
 - import_playbook: rpm-fusion.yml
 - import_playbook: copr.yml
 - import_playbook: flatpak.yml
+- import_playbook: rust.yml
 - import_playbook: gamemode.yml
 - import_playbook: steam.yml
 - import_playbook: 1password.yml

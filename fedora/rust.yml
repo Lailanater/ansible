@@ -1,0 +1,8 @@
+- name: Install rust
+  hosts: localhost
+  tasks:
+    - name: Run rustup-init
+      shell: rustup-init -y
+
+    - name: Install eza
+      shell: cargo install eza

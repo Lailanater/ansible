@@ -8,5 +8,5 @@
 
     - name: Stow files
       command:
-        cmd: ./fedora-kde
+        cmd: ./stow
         chdir: "~/dotfiles"

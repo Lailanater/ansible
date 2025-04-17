@@ -2,6 +2,15 @@
   hosts: localhost
   become: true
   tasks:
+    - name: Enable third party repos
+      dnf5:
+        name:
+          - fedora-workstation-repositories
+        state: present
+
+    - name: Enable Google Chrome repo
+      raw: sudo dnf config-manager setopt google-chrome.enabled=1
+
     - name: Install programs from dnf
       dnf5:
         name:
@@ -19,7 +28,7 @@
           - gamemode
           - solaar
           - zsh
-          - eza
+          - rustup
           - golang
           - zsh-autosuggestions
           - zsh-syntax-highlighting

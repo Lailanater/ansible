@@ -1,6 +1,9 @@
 - name: Flatpak
   hosts: localhost
   tasks:
+    - name: Setup Flathub
+      shell: flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
     - name: Install programs from Flatpak
       community.general.flatpak:
         name:
