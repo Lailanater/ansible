@@ -5,4 +5,4 @@
       shell: rustup-init -y
 
     - name: Install eza
-      shell: cargo install eza
+      shell: exec $SHELL && cargo install eza
