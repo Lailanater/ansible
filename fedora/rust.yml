@@ -1,8 +1,8 @@
-- name: Install rust
+- name: Setup rust
   hosts: localhost
   tasks:
     - name: Run rustup-init
       shell: rustup-init -y
 
     - name: Install eza
-      shell: exec $SHELL && cargo install eza
+      shell: exec /bin/zsh -c "cargo install eza"
