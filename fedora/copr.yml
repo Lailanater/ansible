@@ -7,11 +7,6 @@
         host: copr.fedorainfracloud.org
         state: enabled
         name: atim/lazygit
-    - name: Enable Ghostty
-      community.general.copr:
-        host: copr.fedorainfracloud.org
-        state: enabled
-        name: pgdev/ghostty
     - name: Enable WezTerm
       community.general.copr:
         host: copr.fedorainfracloud.org
@@ -22,6 +17,5 @@
       dnf5:
         name:
           - lazygit
-          - ghostty
           - wezterm
         state: present
