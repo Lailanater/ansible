@@ -1,0 +1,29 @@
+- name: PAM
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Replace ignored line pam_kwallet to auth
+      ansible.builtin.lineinfile:
+        path: /etc/pam.d/sddm
+        backup: true
+        regex: ^-auth\s+optional\s+pam_kwallet5\.so$
+        line: auth        optional      pam_kwallet5.so
+
+    - name: Add pam_kwallet to auth
+      ansible.builtin.lineinfile:
+        path: /etc/pam.d/sddm
+        backup: true
+        insertafter: auth\s+optional\s+pam_gnome_keyring\.so$
+        line: auth        optional      pam_kwallet5.so
+
+    - name: Replace ignored line pam_kwallet to session
+      ansible.builtin.lineinfile:
+        path: /etc/pam.d/sddm
+        regex: ^-session\s+optional\s+pam_kwallet5\.so auto_start$
+        line: session     optional      pam_kwallet5.so auto_start
+
+    - name: Add pam_kwallet to session
+      ansible.builtin.lineinfile:
+        path: /etc/pam.d/sddm
+        insertafter: session\s+optional\s+pam_gnome_keyring\.so auto_start$
+        line: session     optional      pam_kwallet5.so auto_start
