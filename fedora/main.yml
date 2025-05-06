@@ -22,3 +22,4 @@
 - import_playbook: virtualization.yml
 - import_playbook: pam.yml
 - import_playbook: dots.yml
+- import_playbook: yubikey.yml

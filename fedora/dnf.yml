@@ -34,6 +34,8 @@
           - zsh-syntax-highlighting
           - google-chrome-stable
           - audacity
+          - pam-u2f
+          - pamu2fcfg
           - vlc
           - fzf
         state: present

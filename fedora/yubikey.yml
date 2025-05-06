@@ -1,0 +1,65 @@
+- name: Yubikey
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Create u2f-sufficient pam file
+      ansible.builtin.copy:
+        src: ./files/u2f-sufficient
+        dest: /etc/pam.d/u2f-sufficient
+
+    - name: Allow yubikey to authenticate for sudo
+      ansible.builtin.lineinfile:
+        backup: true
+        path: /etc/pam.d/sudo
+        line: auth       include      u2f-sufficient
+        insertbefore: auth\s+include\s+system-auth
+
+    - name: Allow yubikey to authenticate for login
+      ansible.builtin.lineinfile:
+        backup: true
+        path: /etc/pam.d/login
+        line: auth       include      u2f-sufficient
+        insertbefore: auth\s+substack\s+system-auth
+
+    - name: Allow yubikey to authenticate for kde
+      ansible.builtin.lineinfile:
+        backup: true
+        path: /etc/pam.d/kde
+        line: auth        include       u2f-sufficient
+        insertbefore: auth\s+substack\s+password-auth
+
+    - name: Check if polkit pam file already exists
+      ansible.builtin.stat:
+        path: /etc/pam.d/polkit-1
+      register: polkit_stats
+
+    - name: Copy polkit pam file if it does not already exist
+      when: polkit_stats.stat.exists == false
+      ansible.builtin.copy:
+        src: /usr/lib/pam.d/polkit-1
+        remote_src: true
+        dest: /etc/pam.d/polkit-1
+
+    - name: Allow yubikey to authenticate for polkit
+      ansible.builtin.lineinfile:
+        backup: true
+        path: /etc/pam.d/polkit-1
+        line: auth       include      u2f-sufficient
+        insertbefore: auth\s+include\s+system-auth
+
+    - name: Make sure Yubico config directory is present
+      become: false
+      ansible.builtin.shell:
+        cmd: mkdir -p ~/.config/Yubico
+
+    - name: Check if u2f_keys file already exists
+      become: false
+      ansible.builtin.stat:
+        path: ~/.config/Yubico/u2f_keys
+      register: u2f_keys_stats
+
+    - name: Configure primary and backup yubikey
+      become: false
+      when: u2f_keys_stats.stat.exists == false or u2f_keys_stats.stat.size == 0
+      ansible.builtin.shell:
+        cmd: pamu2fcfg > ~/.config/Yubico/u2f_keys && pamu2fcfg -n >> ~/.config/Yubico/u2f_keys
