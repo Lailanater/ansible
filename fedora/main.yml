@@ -1,15 +1,6 @@
-- name: Fedora
-  hosts: localhost
-  become: true
-  tasks:
-    - name: Upgrade/update dnf
-      dnf5:
-        update_cache: true
-        update_only: true
-
-- import_playbook: dnf.yml
 - import_playbook: rpm-fusion.yml
 - import_playbook: copr.yml
+- import_playbook: dnf.yml
 - import_playbook: flatpak.yml
 - import_playbook: rust.yml
 - import_playbook: gamemode.yml

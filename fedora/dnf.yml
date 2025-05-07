@@ -11,6 +11,9 @@
     - name: Enable Google Chrome repo
       raw: sudo dnf config-manager setopt google-chrome.enabled=1
 
+    - name: Upgrade and refresh dnf
+      raw: sudo dnf upgrade --refresh -y
+
     - name: Install programs from dnf
       dnf5:
         name:
@@ -38,6 +41,13 @@
           - pamu2fcfg
           - vlc
           - fzf
+          - discord
+          - gamescope
+          - inotify-tools
+          - lshw
+          - nvtop
+          - obs-studio
+          - rclone
         state: present
 
     - name: Set default yes in dnf.conf
