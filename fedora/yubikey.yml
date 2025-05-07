@@ -2,7 +2,13 @@
   hosts: localhost
   become: true
   tasks:
-    - name: Create u2f-sufficient pam file
+    - name: Check if u2f-sufficient pam file already exists
+      ansible.builtin.stat:
+        path: /etc/pam.d/u2f-sufficient
+      register: u2f_sufficient_stats
+
+    - name: Copy u2f-sufficient pam file
+      when: u2f_sufficient_stats.stat.exists == false
       ansible.builtin.copy:
         src: ./files/u2f-sufficient
         dest: /etc/pam.d/u2f-sufficient
