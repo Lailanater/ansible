@@ -48,6 +48,7 @@
           - nvtop
           - obs-studio
           - rclone
+          - expect
         state: present
 
     - name: Set default yes in dnf.conf
