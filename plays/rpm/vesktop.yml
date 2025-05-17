@@ -1,27 +1,17 @@
-- name: Download Vesktop
+- name: Install Vesktop
   hosts: localhost
   tasks:
     - name: Download Vesktop
-      command:
-        cmd: wget -O ~/Downloads/vesktop.rpm https://vencord.dev/download/vesktop/amd64/rpm
+      command: wget -O ~/Downloads/vesktop.rpm https://vencord.dev/download/vesktop/amd64/rpm
 
-    - name: Get user info
+    - name: Get $HOME value
       set_fact:
         user_home: "{{ ansible_env.HOME }}"
 
-- name: Install Vesktop
-  hosts: localhost
-  become: true
-  tasks:
     - name: Install Vesktop
-      dnf5:
-        name: "{{ user_home }}/Downloads/vesktop.rpm"
-        state: present
-        disable_gpg_check: true
+      become: true
+      command: "dnf install -y {{ user_home }}/Downloads/vesktop.rpm"
 
-- name: Create Vesktop theme folder
-  hosts: localhost
-  tasks:
     - name: Ensure folder exists
       file:
         path: "{{ user_home }}/.config/vesktop/themes"
