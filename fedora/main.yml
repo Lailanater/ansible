@@ -9,6 +9,7 @@
 - import_playbook: ../plays/generic/volta.yml
 - import_playbook: ../plays/generic/starship.yml
 - import_playbook: ../plays/generic/zsh.yml
+- import_playbook: ../plays/generic/tmux.yml
 - import_playbook: ../plays/rpm/vesktop.yml
 - import_playbook: virtualization.yml
 - import_playbook: pam.yml
