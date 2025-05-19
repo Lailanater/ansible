@@ -46,6 +46,7 @@
           - inotify-tools
           - lshw
           - nvtop
+          - tmux
           - obs-studio
           - rclone
           - expect
