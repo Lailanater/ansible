@@ -5,12 +5,12 @@
 - import_playbook: rust.yml
 - import_playbook: ../plays/generic/gamemode.yml
 - import_playbook: ../plays/generic/steam.yml
-- import_playbook: ../plays/rpm/1password.yml
+- import_playbook: ../plays/dnf/1password.yml
 - import_playbook: ../plays/generic/volta.yml
 - import_playbook: ../plays/generic/starship.yml
 - import_playbook: ../plays/generic/zsh.yml
 - import_playbook: ../plays/generic/tmux.yml
-- import_playbook: ../plays/rpm/vesktop.yml
+- import_playbook: ../plays/dnf/vesktop.yml
 - import_playbook: virtualization.yml
 - import_playbook: pam.yml
 - import_playbook: ../plays/generic/dots.yml
