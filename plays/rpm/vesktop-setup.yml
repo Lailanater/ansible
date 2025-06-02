@@ -4,11 +4,7 @@
     - name: Download Vesktop
       command: wget -O ~/Downloads/vesktop.rpm https://vencord.dev/download/vesktop/amd64/rpm
 
-    - name: Get $HOME value
-      set_fact:
-        user_home: "{{ ansible_env.HOME }}"
-
     - name: Ensure folder exists
       file:
-        path: "{{ user_home }}/.config/vesktop/themes"
+        path: "{{ ansible_env.HOME }}/.config/vesktop/themes"
         state: directory
