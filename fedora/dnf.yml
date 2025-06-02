@@ -1,62 +1,73 @@
 - name: Fedora
   hosts: localhost
-  become: true
   tasks:
-    - name: Enable third party repos
-      dnf5:
-        name:
-          - fedora-workstation-repositories
-        state: present
+    - name: Get user home
+      set_fact:
+        user_home: "{{ ansible_env.HOME }}"
 
-    - name: Enable Google Chrome repo
-      raw: sudo dnf config-manager setopt google-chrome.enabled=1
+    - become: true
+      block:
+        - name: Enable third party repos
+          dnf5:
+            name:
+              - fedora-workstation-repositories
+            state: present
 
-    - name: Upgrade and refresh dnf
-      raw: sudo dnf upgrade --refresh -y
+        - name: Enable Google Chrome repo
+          raw: dnf config-manager setopt google-chrome.enabled=1
 
-    - name: Install programs from dnf
-      dnf5:
-        name:
-          - steam
-          - fastfetch
-          - neovim
-          - gh
-          - git
-          - stow
-          - btop
-          - easyeffects
-          - mangohud
-          - docker
-          - docker-compose
-          - gamemode
-          - solaar
-          - zsh
-          - rustup
-          - golang
-          - zsh-autosuggestions
-          - zsh-syntax-highlighting
-          - google-chrome-stable
-          - audacity
-          - yubikey-manager
-          - pam-u2f
-          - pamu2fcfg
-          - vlc
-          - fzf
-          - discord
-          - gamescope
-          - inotify-tools
-          - lshw
-          - nvtop
-          - tmux
-          - obs-studio
-          - rclone
-          - expect
-        state: present
+        - name: Upgrade and refresh dnf
+          raw: dnf upgrade --refresh -y
 
-    - name: Set default yes in dnf.conf
-      lineinfile:
-        path: /etc/dnf/dnf.conf
-        search_string: "defaultyes="
-        line: "defaultyes=True"
-        state: present
-        backup: true
+        - name: Install programs from dnf
+          dnf5:
+            name:
+              - steam
+              - fastfetch
+              - neovim
+              - gh
+              - git
+              - stow
+              - btop
+              - easyeffects
+              - mangohud
+              - docker
+              - docker-compose
+              - gamemode
+              - solaar
+              - zsh
+              - rustup
+              - golang
+              - zsh-autosuggestions
+              - zsh-syntax-highlighting
+              - google-chrome-stable
+              - audacity
+              - yubikey-manager
+              - pam-u2f
+              - pamu2fcfg
+              - vlc
+              - fzf
+              - discord
+              - gamescope
+              - inotify-tools
+              - lshw
+              - nvtop
+              - tmux
+              - obs-studio
+              - rclone
+              - expect
+              - 1password
+              - 1password-cli
+            state: present
+
+        - name: Install local programs with dnf
+          ansible.builtin.shell:
+            cmd: "dnf install -y {{ user_home }}/Downloads/vesktop.rpm"
+
+        - name: Set default yes in dnf.conf
+          lineinfile:
+            path: /etc/dnf/dnf.conf
+            search_string: "defaultyes="
+            line: "defaultyes=True"
+            state: present
+            backup: true

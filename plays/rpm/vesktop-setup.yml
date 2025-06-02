@@ -1,4 +1,4 @@
-- name: Install Vesktop
+- name: Setup Vesktop for Install
   hosts: localhost
   tasks:
     - name: Download Vesktop
@@ -7,10 +7,6 @@
     - name: Get $HOME value
       set_fact:
         user_home: "{{ ansible_env.HOME }}"
-
-    - name: Install Vesktop
-      become: true
-      command: "dnf install -y {{ user_home }}/Downloads/vesktop.rpm"
 
     - name: Ensure folder exists
       file:
