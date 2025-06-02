@@ -1,71 +1,56 @@
-- name: Yubikey
+- name: YubiKey
   hosts: localhost
-  become: true
   tasks:
-    - name: Check if u2f-sufficient pam file already exists
-      ansible.builtin.stat:
-        path: /etc/pam.d/u2f-sufficient
-      register: u2f_sufficient_stats
-
-    - name: Copy u2f-sufficient pam file
-      when: u2f_sufficient_stats.stat.exists == false
-      ansible.builtin.copy:
-        src: ./files/u2f-sufficient
-        dest: /etc/pam.d/u2f-sufficient
-
-    - name: Allow yubikey to authenticate for sudo
-      ansible.builtin.lineinfile:
-        backup: true
-        path: /etc/pam.d/sudo
-        line: auth       include      u2f-sufficient
-        insertbefore: auth\s+include\s+system-auth
-
-    - name: Allow yubikey to authenticate for login
-      ansible.builtin.lineinfile:
-        backup: true
-        path: /etc/pam.d/login
-        line: auth       include      u2f-sufficient
-        insertbefore: auth\s+substack\s+system-auth
-
-    - name: Allow yubikey to authenticate for kde
-      ansible.builtin.lineinfile:
-        backup: true
-        path: /etc/pam.d/kde
-        line: auth        include       u2f-sufficient
-        insertbefore: auth\s+substack\s+password-auth
-
-    - name: Check if polkit pam file already exists
-      ansible.builtin.stat:
-        path: /etc/pam.d/polkit-1
-      register: polkit_stats
-
-    - name: Copy polkit pam file if it does not already exist
-      when: polkit_stats.stat.exists == false
-      ansible.builtin.copy:
-        src: /usr/lib/pam.d/polkit-1
-        remote_src: true
-        dest: /etc/pam.d/polkit-1
-
-    - name: Allow yubikey to authenticate for polkit
-      ansible.builtin.lineinfile:
-        backup: true
-        path: /etc/pam.d/polkit-1
-        line: auth       include      u2f-sufficient
-        insertbefore: auth\s+include\s+system-auth
-
-    - name: Make sure Yubico config directory is present
-      become: false
+    - name: Check for YubiKey presence
       ansible.builtin.shell:
-        cmd: mkdir -p ~/.config/Yubico
+        cmd: ykman list
+      register: ykman_result
 
-    - name: Check if u2f_keys file already exists
-      become: false
-      ansible.builtin.stat:
-        path: ~/.config/Yubico/u2f_keys
-      register: u2f_keys_stats
+    - name: If YubiKey is plugged in; configure it
+      when: ykman_result.stdout != ""
+      block:
+        - name: Ensure there is a u2f_keys file
+          ansible.builtin.file:
+            path: ~/.config/Yubico/u2f_keys
+            state: touch
+          register: u2f_keys_file
 
-    - name: Configure primary and backup yubikey
-      become: false
-      when: u2f_keys_stats.stat.exists == false or u2f_keys_stats.stat.size == 0
-      ansible.builtin.shell:
-        cmd: pamu2fcfg > ~/.config/Yubico/u2f_keys && pamu2fcfg -n >> ~/.config/Yubico/u2f_keys
+        - name: Configure primary YubiKey
+          when: u2f_keys_file.size == 0
+          register: primary_yubikey
+          ansible.builtin.shell:
+            cmd: pamu2fcfg > ~/.config/Yubico/u2f_keys
+
+        - when: primary_yubikey.changed
+          block:
+            - register: setup_backup_prompt
+              ansible.builtin.pause:
+                prompt: "Would you like to setup a backup YubiKey now? [y/N]"
+
+            - name: Configure backup YubiKey
+              when: setup_backup_prompt.user_input == 'y' or setup_backup_prompt.user_input == 'Y'
+              ansible.builtin.shell:
+                cmd: pamu2fcfg -n >> ~/.config/Yubico/u2f_keys
+
+        - name: Make sure authselect is on local profile
+          register: authselect_current_profile
+          ansible.builtin.shell:
+            cmd: 'authselect current | grep "Profile ID: local" || true'
+
+        - when: 'authselect_current_profile.stdout == "Profile ID: local"'
+          block:
+            - name: Determine if with-pam-u2f is enabled
+              register: is_with_pam_u2f_enabled
+              ansible.builtin.shell:
+                cmd: authselect current | grep -o "with-pam-u2f" || true
+
+            - when: is_with_pam_u2f_enabled.stdout == ""
+              become: true
+              block:
+                - name: Enable with-pam-u2f
+                  ansible.builtin.shell:
+                    cmd: authselect enable-feature with-pam-u2f
+
+                - name: Apply authselect changes
+                  ansible.builtin.shell:
+                    cmd: authselect apply-changes --backup=ansible
