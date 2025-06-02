@@ -1,7 +1,13 @@
 - name: Edit Steam config
   hosts: localhost
   tasks:
-    - name: Make sure steam has started once to generate config files
+    - name: Check if steam_dev.cfg exists
+      register: steam_dev_stats
+      ansible.builtin.stat:
+        path: "{{ ansible_env.HOME }}/.steam/steam/steam_dev.cfg"
+
+    - name: Start Steam once to generate config files
+      when: steam_dev_stats.stat.exists == false
       shell: timeout 8 steam
       register: result
       failed_when: result.rc != 124
