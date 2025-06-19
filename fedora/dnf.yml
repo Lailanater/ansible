@@ -58,6 +58,7 @@
               - expect
               - 1password
               - 1password-cli
+              - syncthing
             state: present
 
         - name: Install local programs with dnf
