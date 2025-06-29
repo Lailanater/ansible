@@ -17,6 +17,7 @@
           - org.prismlauncher.PrismLauncher
           - md.obsidian.Obsidian
           - org.signal.Signal
+          - dev.vencord.Vesktop
           - runtime/org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/24.08
           - runtime/org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/23.08
           - runtime/org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/23.08

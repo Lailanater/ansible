@@ -10,6 +10,7 @@
     - name: Install programs from pacman
       community.general.pacman:
         name:
+          - lib32-vulkan-radeon
           - steam
           - fastfetch
           - neovim
@@ -47,4 +48,14 @@
           - plymouth
           - snap-pac
           - grub-btrfs
+          - wezterm
+          - eza
+          - starship
+          - lsp-plugins-lv2
+          - partitionmanager
+          - noto-fonts-cjk
+          - kwalletmanager
+          - yubikey-manager
+          - pam-u2f
+          - lazygit
         state: present
