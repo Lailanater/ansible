@@ -1,0 +1,10 @@
+- import_playbook: setup.yml
+- import_playbook: pacman.yml
+- import_playbook: 1password.yml
+- import_playbook: ../plays/generic/flatpak.yml
+- import_playbook: ../plays/generic/gamemode.yml
+- import_playbook: ../plays/generic/steam.yml
+- import_playbook: ../plays/generic/volta.yml
+- import_playbook: ../plays/generic/zsh.yml
+- import_playbook: ../plays/generic/tmux.yml
+- import_playbook: ../plays/generic/dots.yml

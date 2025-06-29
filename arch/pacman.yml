@@ -1,0 +1,50 @@
+- name: Pacman
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Run the equivalent of "pacman -Syu" as a separate step
+      community.general.pacman:
+        update_cache: true
+        upgrade: true
+
+    - name: Install programs from pacman
+      community.general.pacman:
+        name:
+          - steam
+          - fastfetch
+          - neovim
+          - github-cli
+          - git
+          - stow
+          - btop
+          - easyeffects
+          - mangohud
+          - docker
+          - docker-compose
+          - gamemode
+          - solaar
+          - zsh
+          - rustup
+          - go
+          - zsh-autosuggestions
+          - zsh-syntax-highlighting
+          - chromium
+          - audacity
+          - vlc
+          - fzf
+          - discord
+          - gamescope
+          - inotify-tools
+          - lshw
+          - nvtop
+          - tmux
+          - obs-studio
+          - rclone
+          - expect
+          - syncthing
+          - unzip
+          - flatpak
+          - plymouth
+          - snap-pac
+          - grub-btrfs
+        state: present

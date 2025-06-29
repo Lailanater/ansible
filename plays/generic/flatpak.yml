@@ -15,6 +15,8 @@
           - net.davidotek.pupgui2
           - org.cryptomator.Cryptomator
           - org.prismlauncher.PrismLauncher
+          - md.obsidian.Obsidian
+          - org.signal.Signal
           - runtime/org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/24.08
           - runtime/org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/23.08
           - runtime/org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/23.08
