@@ -18,6 +18,10 @@
           - git
           - stow
           - btop
+          - rocm-smi-lib
+          - os-prober
+          - wl-clipboard
+          - man-db
           - easyeffects
           - mangohud
           - docker
