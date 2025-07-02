@@ -23,6 +23,11 @@
           - wl-clipboard
           - virt-manager
           - qemu-full
+          - speech-dispatcher
+          - system-config-printer
+          - cups
+          - cups-filters
+          - cups-pdf
           - dnsmasq
           - man-db
           - easyeffects
