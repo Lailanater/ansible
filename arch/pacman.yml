@@ -39,6 +39,7 @@
           - docker
           - docker-compose
           - docker-buildx
+          - firefox
           - gamemode
           - solaar
           - zsh
