@@ -1,0 +1,34 @@
+- name: Plymouth
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Install plymouth
+      community.general.pacman:
+        name: plymouth
+        state: present
+
+    - name: Get grub config
+      shell: grep -E -e '^GRUB_CMDLINE_LINUX_DEFAULT=".* splash' /etc/default/grub
+      register: grep_grub
+      ignore_errors: true
+
+    - when: grep_grub.rc == 1
+      block:
+        - name: Add splash kernel param to grub
+          shell: sed -i.bak -E 's/^GRUB_CMDLINE_LINUX_DEFAULT="(.*)"/GRUB_CMDLINE_LINUX_DEFAULT="\1 splash"/' /etc/default/grub
+
+        - name: Regenerate grub.cfg
+          shell: grub-mkconfig -o /boot/grub/grub.cfg
+
+    - name: Get current mkinitcpio config
+      shell: grep -E -e '^HOOKS=(.*) plymouth ' /etc/mkinitcpio.conf
+      register: grep_mkinitcpio
+      ignore_errors: true
+
+    - when: grep_mkinitcpio.rc == 1
+      block:
+        - name: Add plymouth mkinitcpio hook
+          shell: sed -i.bak -E 's/^HOOKS=(.*) encrypt (.*)/HOOKS=\1 plymouth encrypt \2/' /etc/mkinitcpio.conf
+
+        - name: Regenerate initramfs
+          shell: mkinitcpio -P
