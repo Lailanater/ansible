@@ -1,0 +1,21 @@
+- name: OS Prober
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Install os-prober
+      community.general.pacman:
+        name: os-prober
+        state: present
+
+    - name: Get grub config
+      shell: grep -E -e '^#GRUB_DISABLE_OS_PROBER=false' /etc/default/grub
+      register: grep_grub
+      ignore_errors: true
+
+    - when: grep_grub.rc == 1
+      block:
+        - name: Uncomment os-prober line
+          shell: sed -i.bak -E 's/^#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' /etc/default/grub
+
+        - name: Regenerate grub.cfg
+          shell: grub-mkconfig -o /boot/grub/grub.cfg

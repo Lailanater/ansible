@@ -19,7 +19,6 @@
           - stow
           - btop
           - rocm-smi-lib
-          - os-prober
           - wl-clipboard
           - virt-manager
           - qemu-full
