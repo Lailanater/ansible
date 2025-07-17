@@ -1,6 +1,7 @@
 - import_playbook: setup.yml
 - import_playbook: pacman.yml
 - import_playbook: plymouth.yml
+- import_playbook: snapper.yml
 - import_playbook: 1password.yml
 - import_playbook: ../plays/generic/flatpak.yml
 - import_playbook: ../plays/generic/gamemode.yml

@@ -1,0 +1,23 @@
+- name: Snapper
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Install Snapper utils
+      community.general.pacman:
+        name:
+          - snap-pac
+          - grub-btrfs
+        state: present
+
+    - name: Get mkinitcpio config
+      shell: grep -E -e '^HOOKS=".* grub-btrfs-overlayfs' /etc/mkinitcpio.conf
+      register: grep_mkinitcpio
+      ignore_errors: true
+
+    - when: grep_mkinitcpio.rc == 1
+      block:
+        - name: Add grub-btrfs-overlayfs to mkinitcpio hooks
+          shell: sed -i.bak -E 's/^HOOKS=(.*)\)/HOOKS=\1 grub-btrfs-overlayfs)/' /etc/mkinitcpio.conf
+
+        - name: Regenerate initramfs
+          shell: mkinitcpio -P
