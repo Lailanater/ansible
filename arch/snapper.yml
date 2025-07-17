@@ -17,7 +17,7 @@
     - when: grep_mkinitcpio.rc == 1
       block:
         - name: Add grub-btrfs-overlayfs to mkinitcpio hooks
-          shell: sed -i.bak -E 's/^HOOKS=(.*)\)/HOOKS=\1 grub-btrfs-overlayfs)/' /etc/mkinitcpio.conf
+          shell: sed -i.snapper.bak -E 's/^HOOKS=(.*)\)/HOOKS=\1 grub-btrfs-overlayfs)/' /etc/mkinitcpio.conf
 
         - name: Regenerate initramfs
           shell: mkinitcpio -P

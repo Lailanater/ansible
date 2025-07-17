@@ -12,10 +12,15 @@
       register: grep_grub
       ignore_errors: true
 
+    - when: grep_mkinitcpio.rc == 1 or grep_grub.rc == 1
+      ansible.builtin.copy:
+        src: /etc/mkinitcpio.conf
+        dest: /etc/mkinitcpio.conf.plymouth.bak
+
     - when: grep_grub.rc == 1
       block:
         - name: Add splash kernel param to grub
-          shell: sed -i.bak -E 's/^GRUB_CMDLINE_LINUX_DEFAULT="(.*)"/GRUB_CMDLINE_LINUX_DEFAULT="\1 splash"/' /etc/default/grub
+          shell: sed -i -E 's/^GRUB_CMDLINE_LINUX_DEFAULT="(.*)"/GRUB_CMDLINE_LINUX_DEFAULT="\1 splash"/' /etc/default/grub
 
         - name: Regenerate grub.cfg
           shell: grub-mkconfig -o /boot/grub/grub.cfg
@@ -28,7 +33,7 @@
     - when: grep_mkinitcpio.rc == 1
       block:
         - name: Add plymouth mkinitcpio hook
-          shell: sed -i.bak -E 's/^HOOKS=(.*) encrypt (.*)/HOOKS=\1 plymouth encrypt \2/' /etc/mkinitcpio.conf
+          shell: sed -i -E 's/^HOOKS=(.*) encrypt (.*)/HOOKS=\1 plymouth encrypt \2/' /etc/mkinitcpio.conf
 
         - name: Regenerate initramfs
           shell: mkinitcpio -P
