@@ -1,0 +1,32 @@
+- name: Reflector
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Install reflector
+      community.general.pacman:
+        name: reflector
+        state: present
+
+    - name: Comment out latest so we get all possible mirrors
+      shell: sed -i.bak -E 's/^--latest/# --latest/' /etc/xdg/reflector/reflector.conf
+
+    - name: Configure country
+      shell: sed -i -E 's/^(# |)--country.*/--country CA/' /etc/xdg/reflector/reflector.conf
+
+    - name: Enable reflector service
+      shell: systemctl enable reflector.service
+
+    - name: Has reflector run before?
+      shell: grep -i reflector /etc/pacman.d/mirrorlist
+      register: reflector_mirrorlist
+      ignore_errors: true
+
+    - when: reflector_mirrorlist.rc == 1
+      block:
+        - name: Backup mirrorlist
+          ansible.builtin.copy:
+            src: /etc/pacman.d/mirrorlist
+            dest: /etc/pacman.d/mirrorlist.bak
+
+        - name: Run reflector service
+          shell: systemctl start reflector.service

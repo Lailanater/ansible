@@ -30,7 +30,6 @@
           - dnsmasq
           - power-profiles-daemon
           - kcalc
-          - reflector
           - pacman-contrib
           - man-db
           - easyeffects

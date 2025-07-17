@@ -3,6 +3,7 @@
 - import_playbook: plymouth.yml
 - import_playbook: snapper.yml
 - import_playbook: os-prober.yml
+- import_playbook: reflector.yml
 - import_playbook: 1password.yml
 - import_playbook: ../plays/generic/flatpak.yml
 - import_playbook: ../plays/generic/gamemode.yml
