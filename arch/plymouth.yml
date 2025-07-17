@@ -12,6 +12,11 @@
       register: grep_grub
       ignore_errors: true
 
+    - name: Get current mkinitcpio config
+      shell: grep -E -e '^HOOKS=(.*) plymouth ' /etc/mkinitcpio.conf
+      register: grep_mkinitcpio
+      ignore_errors: true
+
     - when: grep_mkinitcpio.rc == 1 or grep_grub.rc == 1
       ansible.builtin.copy:
         src: /etc/mkinitcpio.conf
@@ -24,11 +29,6 @@
 
         - name: Regenerate grub.cfg
           shell: grub-mkconfig -o /boot/grub/grub.cfg
-
-    - name: Get current mkinitcpio config
-      shell: grep -E -e '^HOOKS=(.*) plymouth ' /etc/mkinitcpio.conf
-      register: grep_mkinitcpio
-      ignore_errors: true
 
     - when: grep_mkinitcpio.rc == 1
       block:

@@ -12,7 +12,7 @@
       register: grep_grub
       ignore_errors: true
 
-    - when: grep_grub.rc == 1
+    - when: grep_grub.rc == 0
       block:
         - name: Uncomment os-prober line
           shell: sed -i.os-prober.bak -E 's/^#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' /etc/default/grub
