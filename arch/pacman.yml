@@ -29,11 +29,16 @@
           - cups-filters
           - cups-pdf
           - dnsmasq
+          - power-profiles-daemon
+          - kcalc
+          - reflector
+          - pacman-contrib
           - man-db
           - easyeffects
           - mangohud
           - docker
           - docker-compose
+          - docker-buildx
           - gamemode
           - solaar
           - zsh
