@@ -10,7 +10,7 @@
         state: present
 
     - name: Get mkinitcpio config
-      shell: grep -E -e '^HOOKS=".* grub-btrfs-overlayfs' /etc/mkinitcpio.conf
+      shell: grep -E -e '^HOOKS=.* grub-btrfs-overlayfs' /etc/mkinitcpio.conf
       register: grep_mkinitcpio
       ignore_errors: true
 
