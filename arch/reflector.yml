@@ -13,8 +13,17 @@
     - name: Configure country
       shell: sed -i -E 's/^(# |)--country.*/--country CA/' /etc/xdg/reflector/reflector.conf
 
-    - name: Enable reflector service
-      shell: systemctl enable reflector.service
+    - name: Enable reflector timer
+      shell: systemctl enable reflector.timer
+
+    - name: Status of reflector timer
+      shell: systemctl status reflector.timer | grep "inactive (dead)"
+      register: timer_status
+      ignore_errors: true
+
+    - when: timer_status.rc == 0
+      name: Start reflector timer
+      shell: systemctl start reflector.timer
 
     - name: Has reflector run before?
       shell: grep -i reflector /etc/pacman.d/mirrorlist
