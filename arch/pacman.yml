@@ -2,18 +2,6 @@
   hosts: localhost
   become: true
   tasks:
-    - name: Check if ILoveCandy option is present
-      shell: grep "ILoveCandy" /etc/pacman.conf
-      register: i_love_candy
-      ignore_errors: true
-
-    - when: i_love_candy.rc == 1
-      name: Enable ILoveCandy option
-      shell: awk '{ if ($0 == "[options]") { print; print "ILoveCandy" } else { print } }' /etc/pacman.conf | tee /etc/pacman.conf
-
-    - name: Enable Color option
-      shell: sed -i 's/^#Color/Color/' /etc/pacman.conf
-
     - name: Run the equivalent of "pacman -Syu" as a separate step
       community.general.pacman:
         update_cache: true
@@ -84,3 +72,33 @@
           - pam-u2f
           - lazygit
         state: present
+
+    - name: Get current data and time
+      shell: date +"%Y-%m-%dT%H:%M:%S"
+      register: pacman_backup_date
+
+    - name: Create backup of pacman.conf
+      register: pacman_conf_backup
+      shell: cp /etc/pacman.conf /etc/pacman.conf.{{ pacman_backup_date.stdout }}.backup
+
+    - name: Check if ILoveCandy option is present
+      shell: grep "ILoveCandy" /etc/pacman.conf
+      register: i_love_candy_grep
+      ignore_errors: true
+
+    - when: i_love_candy_grep.rc == 1
+      name: Enable ILoveCandy option
+      shell: sed -i '/^\[options\]$/a ILoveCandy' /etc/pacman.conf
+
+    - name: Check if Color option is enabled
+      shell: grep "^Color" /etc/pacman.conf
+      register: color_grep
+      ignore_errors: true
+
+    - when: color_grep.rc == 1
+      name: Enable Color option
+      shell: sed -i 's/^#Color/Color/' /etc/pacman.conf
+
+    - when: i_love_candy_grep.rc == 0 and color_grep.rc == 0
+      name: Remove pacman backup since nothing changed
+      shell: rm /etc/pacman.conf.{{ pacman_backup_date.stdout }}.backup
