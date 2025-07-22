@@ -72,3 +72,15 @@
           - pam-u2f
           - lazygit
         state: present
+
+    - name: Check if ILoveCandy option is present
+      shell: grep "ILoveCandy" /etc/pacman.conf
+      register: i_love_candy
+      ignore_errors: true
+
+    - when: i_love_candy.rc == 1
+      name: Enable ILoveCandy option
+      shell: awk '{ if ($0 == "[options]") { print; print "ILoveCandy" } else { print } }' /etc/pacman.conf | tee /etc/pacman.conf
+
+    - name: Enable Color option
+      shell: sed -i 's/^#Color/Color/' /etc/pacman.conf
