@@ -99,6 +99,15 @@
       name: Enable Color option
       shell: sed -i 's/^#Color/Color/' /etc/pacman.conf
 
-    - when: i_love_candy_grep.rc == 0 and color_grep.rc == 0
+    - name: Check if VerbosePkgLists option is enabled
+      shell: grep "^VerbosePkgLists" /etc/pacman.conf
+      register: verbose_pkg_lists_grep
+      ignore_errors: true
+
+    - when: verbose_pkg_lists_grep.rc == 1
+      name: Enable VerbosePkgLists option
+      shell: sed -i 's/^#VerbosePkgLists/VerbosePkgLists/' /etc/pacman.conf
+
+    - when: i_love_candy_grep.rc == 0 and color_grep.rc == 0 and verbose_pkg_lists_grep.rc == 0
       name: Remove pacman backup since nothing changed
       shell: rm /etc/pacman.conf.{{ pacman_backup_date.stdout }}.backup
