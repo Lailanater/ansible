@@ -71,6 +71,7 @@
           - yubikey-manager
           - pam-u2f
           - lazygit
+          - python-pipx
         state: present
 
     - name: Get current data and time
