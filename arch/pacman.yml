@@ -49,6 +49,9 @@
           - audacity
           - vlc
           - fzf
+          - ripgrep
+          - fd
+          - curl
           - discord
           - gamescope
           - inotify-tools
