@@ -1,0 +1,24 @@
+- name: Fix suspend (GRUB)
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Query motherboard name
+      shell: dmidecode -t 2 | grep "B650 GAMING X AX"
+      register: motherboard_type
+      ignore_errors: true
+
+    - name: Query for acpi in kernel params
+      shell: grep -E -e '^GRUB_CMDLINE_LINUX_DEFAULT=".* acpi_osi=' /etc/default/grub
+      register: acpi_kernel_param
+      ignore_errors: true
+
+    - debug:
+        var: ansible_date_time.iso8601
+
+    - when: motherboard_type.rc == 0 and acpi_kernel_param.rc == 1
+      block:
+        - name: Add acpi_osi kernel param
+          shell: sed -i.{{ ansible_date_time.iso8601 }}.bak -E "s/^GRUB_CMDLINE_LINUX_DEFAULT=\"(.*)\"/GRUB_CMDLINE_LINUX_DEFAULT=\"\1 acpi_osi='!Windows 2015'\"/" /etc/default/grub
+
+        - name: Regenerate GRUB config
+          shell: grub-mkconfig -o /boot/grub/grub.cfg

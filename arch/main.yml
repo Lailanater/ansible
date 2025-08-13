@@ -5,6 +5,7 @@
 - import_playbook: os-prober.yml
 - import_playbook: reflector.yml
 - import_playbook: 1password.yml
+- import_playbook: ../plays/generic/fix-suspend.yml
 - import_playbook: ../plays/generic/flatpak.yml
 - import_playbook: ../plays/generic/gamemode.yml
 - import_playbook: ../plays/generic/steam.yml
