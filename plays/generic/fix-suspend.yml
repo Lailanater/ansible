@@ -12,9 +12,6 @@
       register: acpi_kernel_param
       ignore_errors: true
 
-    - debug:
-        var: ansible_date_time.iso8601
-
     - when: motherboard_type.rc == 0 and acpi_kernel_param.rc == 1
       block:
         - name: Add acpi_osi kernel param
