@@ -77,13 +77,9 @@
           - python-pipx
         state: present
 
-    - name: Get current data and time
-      shell: date +"%Y-%m-%dT%H:%M:%S"
-      register: pacman_backup_date
-
     - name: Create backup of pacman.conf
       register: pacman_conf_backup
-      shell: cp /etc/pacman.conf /etc/pacman.conf.{{ pacman_backup_date.stdout }}.backup
+      shell: cp /etc/pacman.conf /etc/pacman.conf.{{ ansible_date_time.iso8601 }}.bak
 
     - name: Check if ILoveCandy option is present
       shell: grep "ILoveCandy" /etc/pacman.conf
@@ -114,4 +110,4 @@
 
     - when: i_love_candy_grep.rc == 0 and color_grep.rc == 0 and verbose_pkg_lists_grep.rc == 0
       name: Remove pacman backup since nothing changed
-      shell: rm /etc/pacman.conf.{{ pacman_backup_date.stdout }}.backup
+      shell: rm /etc/pacman.conf.{{ ansible_date_time.iso8601 }}.bak
