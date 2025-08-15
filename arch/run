@@ -1,2 +1,4 @@
 #!/usr/bin/env bash
+ansible-galaxy collection install kewlfft.aur >/dev/null
+
 ansible-playbook main.yml --ask-become-pass
