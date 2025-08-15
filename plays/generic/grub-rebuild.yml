@@ -1,0 +1,12 @@
+- name: GRUB Rebuild
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Check if running arch linux
+      register: is_arch_linux
+      shell: command -v pacman
+      ignore_errors: true
+
+    - name: Regenerate GRUB config
+      when: is_arch_linux.rc == 0
+      shell: grub-mkconfig -o /boot/grub/grub.cfg

@@ -1,0 +1,9 @@
+- name: Query if mkinitcpio command exists
+  shell: command -v mkinitcpio
+  register: has_mkinitcpio
+  ignore_errors: true
+
+- name: Regenerate initramfs with mkinitcpio
+  become: true
+  when: has_mkinitcpio.rc == 0
+  shell: mkinitcpio -P

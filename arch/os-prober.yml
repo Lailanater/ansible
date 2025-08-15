@@ -17,5 +17,4 @@
         - name: Uncomment os-prober line
           shell: sed -i.os-prober.bak -E 's/^#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' /etc/default/grub
 
-        - name: Regenerate grub.cfg
-          shell: grub-mkconfig -o /boot/grub/grub.cfg
+        - import_tasks: ../tasks/grub-rebuild.yml

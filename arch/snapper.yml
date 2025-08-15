@@ -19,5 +19,4 @@
         - name: Add grub-btrfs-overlayfs to mkinitcpio hooks
           shell: sed -i.snapper.bak -E 's/^HOOKS=(.*)\)/HOOKS=\1 grub-btrfs-overlayfs)/' /etc/mkinitcpio.conf
 
-        - name: Regenerate initramfs
-          shell: mkinitcpio -P
+        - import_tasks: ../tasks/initramfs-rebuild.yml
