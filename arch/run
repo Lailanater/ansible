@@ -1,4 +1,11 @@
-#!/usr/bin/env bash
-ansible-galaxy collection install kewlfft.aur >/dev/null
+#!/usr/bin/env sh
+
+if ! command -v ansible >/dev/null 2>&1; then
+  sudo pacman -S --noconfirm ansible
+fi
+
+if ! (ansible-galaxy collection list | grep -q "kewlfft.aur"); then
+  ansible-galaxy collection install kewlfft.aur
+fi
 
 ansible-playbook main.yml --ask-become-pass
