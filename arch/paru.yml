@@ -1,0 +1,30 @@
+- name: Install paru
+  hosts: localhost
+  tasks:
+    - set_fact:
+        user_home: "{{ ansible_env.HOME }}"
+
+    - name: Install paru dependencies
+      become: true
+      raw: pacman -S --needed --noconfirm base-devel
+
+    - name: Create build dir
+      file:
+        path: "{{ user_home }}/build"
+        state: directory
+
+    - name: Check if paru is already cloned
+      stat:
+        path: "{{ user_home }}/build/paru"
+      register: is_paru_cloned
+
+    - name: Clone paru from git
+      when: is_paru_cloned.stat.exists == false
+      shell:
+        cmd: git clone https://aur.archlinux.org/paru.git
+        chdir: "{{ user_home }}/build"
+
+    - name: Build paru
+      shell:
+        cmd: makepkg -si --noconfirm
+        chdir: "{{ user_home }}/build/paru"
