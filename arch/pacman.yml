@@ -78,8 +78,9 @@
         state: present
 
     - name: Create backup of pacman.conf
-      register: pacman_conf_backup
-      shell: cp /etc/pacman.conf /etc/pacman.conf.{{ ansible_date_time.iso8601 }}.bak
+      copy:
+        src: /etc/pacman.conf
+        dest: /etc/pacman.conf.{{ ansible_date_time.iso8601 }}.bak
 
     - name: Check if ILoveCandy option is present
       shell: grep "ILoveCandy" /etc/pacman.conf
