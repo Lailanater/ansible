@@ -34,3 +34,6 @@
           - downgrade
         use: paru
         state: present
+
+    - name: Cleanup `aur_builder` account
+      shell: userdel -r aur_builder
