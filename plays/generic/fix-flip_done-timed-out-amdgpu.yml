@@ -7,9 +7,9 @@
       register: amdgpu_dcdebugmask_kernel_param
       ignore_errors: true
 
-    - when: amdgpu.dcdebugmask_kernel_param.rc == 1
+    - when: amdgpu_dcdebugmask_kernel_param.rc == 1
       block:
-        - name: Add amdgpu_dcdebugmask kernel param
+        - name: Add amdgpu.dcdebugmask kernel param
           shell: sed -i.{{ ansible_date_time.iso8601 }}.bak -E "s/^GRUB_CMDLINE_LINUX_DEFAULT=\"(.*)\"/GRUB_CMDLINE_LINUX_DEFAULT=\"\1 amdgpu.dcdebugmask=0x10\"/" /etc/default/grub
 
         - import_tasks: ../../tasks/grub-rebuild.yml
