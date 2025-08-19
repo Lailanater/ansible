@@ -18,6 +18,10 @@
         mode: 0644
         validate: "visudo -cf %s"
 
+    - name: Setup rust for `aur_builder` user
+      become_user: aur_builder
+      shell: rustup default stable
+
     - name: Install paru
       become_user: aur_builder
       kewlfft.aur.aur:
@@ -36,4 +40,4 @@
         state: present
 
     - name: Cleanup `aur_builder` account
-      shell: userdel -r aur_builder
+      shell: userdel -rf aur_builder
