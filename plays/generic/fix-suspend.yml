@@ -17,5 +17,4 @@
         - name: Add acpi_osi kernel param
           shell: sed -i.{{ ansible_date_time.iso8601 }}.bak -E "s/^GRUB_CMDLINE_LINUX_DEFAULT=\"(.*)\"/GRUB_CMDLINE_LINUX_DEFAULT=\"\1 acpi_osi='!Windows 2015'\"/" /etc/default/grub
 
-        - name: Regenerate GRUB config
-          shell: grub-mkconfig -o /boot/grub/grub.cfg
+        - import_tasks: ../../tasks/grub-rebuild.yml
