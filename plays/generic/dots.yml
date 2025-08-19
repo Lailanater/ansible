@@ -8,5 +8,5 @@
 
     - name: Stow files
       command:
-        cmd: ./run
+        cmd: ./dots
         chdir: "~/dotfiles"
