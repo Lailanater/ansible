@@ -7,6 +7,7 @@
 - import_playbook: 1password-cli.yml
 - import_playbook: ../plays/generic/fix-suspend.yml
 - import_playbook: ../plays/generic/flatpak.yml
+- import_playbook: flatpak-override.yml
 - import_playbook: ../plays/generic/gamemode.yml
 - import_playbook: ../plays/generic/steam.yml
 - import_playbook: ../plays/generic/volta.yml

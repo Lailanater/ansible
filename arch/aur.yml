@@ -36,6 +36,8 @@
           - 1password
           - btrfs-assistant
           - downgrade
+          - heroic-games-launcher-bin
+          - vesktop
         use: paru
         state: present
 

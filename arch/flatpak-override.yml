@@ -1,0 +1,10 @@
+- name: Flatpak Override (Arch)
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Remove programs from Flatpak that are native for Arch
+      community.general.flatpak:
+        name:
+          - com.heroicgameslauncher.hgl
+          - dev.vencord.Vesktop
+        state: absent
