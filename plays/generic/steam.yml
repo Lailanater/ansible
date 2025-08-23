@@ -19,11 +19,11 @@
         line: "@nClientDownloadEnableHTTP2PlatformLinux 0"
         create: true
 
-    - name: Get number of threads
-      command: nproc
+    - name: Get number of threads to use
+      shell: if [[ $(nproc) -le 2 ]]; then echo 1; else echo $(($(nproc) - 2)); fi
       register: nproc_output
 
-    - name: Enable shaders to use all cores
+    - name: Enable shaders to use all but 2 threads
       lineinfile:
         path: "{{ ansible_env.HOME }}/.steam/steam/steam_dev.cfg"
         search_string: "unShaderBackgroundProcessingThreads"
