@@ -7,4 +7,6 @@
         name:
           - com.heroicgameslauncher.hgl
           - dev.vencord.Vesktop
+          - org.signal.Signal
+          - md.obsidian.Obsidian
         state: absent

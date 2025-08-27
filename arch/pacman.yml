@@ -75,6 +75,8 @@
           - pam-u2f
           - lazygit
           - python-pipx
+          - obsidian
+          - signal-desktop
         state: present
 
     - name: Create backup of pacman.conf
