@@ -9,4 +9,5 @@
           - dev.vencord.Vesktop
           - org.signal.Signal
           - md.obsidian.Obsidian
+          - com.mastermindzh.tidal-hifi
         state: absent

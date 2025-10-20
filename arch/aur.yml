@@ -38,6 +38,7 @@
           - downgrade
           - heroic-games-launcher-bin
           - vesktop
+          - tidal-hifi-git
         use: paru
         state: present
 
