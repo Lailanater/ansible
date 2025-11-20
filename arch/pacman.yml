@@ -78,6 +78,7 @@
           - obsidian
           - signal-desktop
           - jq
+          - mise
         state: present
 
     - name: Create backup of pacman.conf
