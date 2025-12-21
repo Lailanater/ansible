@@ -1,0 +1,8 @@
+- name: Cargo
+  hosts: localhost
+  tasks:
+    - name: Install cargo packages
+      community.general.cargo:
+        name:
+          - litra
+          - litra-autotoggle
