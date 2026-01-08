@@ -1,0 +1,14 @@
+- name: Mise
+  hosts: localhost
+  tasks:
+    - name: Check if mise is already installed
+      register: mise_command
+      ignore_errors: true
+      ansible.builtin.shell: command -v ~/.local/bin/mise
+
+    - name: Install mise
+      when: mise_command.rc != 0
+      ansible.builtin.shell: curl https://mise.run | sh
+
+    - name: Install global tools
+      ansible.builtin.shell: mise install

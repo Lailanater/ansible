@@ -42,7 +42,6 @@
           - solaar
           - zsh
           - rustup
-          - go
           - zsh-autosuggestions
           - zsh-syntax-highlighting
           - chromium
@@ -74,11 +73,9 @@
           - yubikey-manager
           - pam-u2f
           - lazygit
-          - python-pipx
           - obsidian
           - signal-desktop
           - jq
-          - mise
         state: present
 
     - name: Create backup of pacman.conf
