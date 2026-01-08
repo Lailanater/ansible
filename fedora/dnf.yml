@@ -3,7 +3,7 @@
   tasks:
     - name: Get user home
       set_fact:
-        user_home: "{{ ansible_env.HOME }}"
+        user_home: "{{ ansible_facts.env.HOME }}"
 
     - become: true
       block:

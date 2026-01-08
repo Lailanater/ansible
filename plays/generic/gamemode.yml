@@ -2,7 +2,7 @@
   tasks:
     - name: Get user info
       set_fact:
-        user_name: "{{ ansible_env.USER }}"
+        user_name: "{{ ansible_facts.env.USER }}"
 
 - name: Feral Gamemode Configuration
   hosts: localhost

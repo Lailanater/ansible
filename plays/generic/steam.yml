@@ -4,7 +4,7 @@
     - name: Check if steam_dev.cfg exists
       register: steam_dev_stats
       ansible.builtin.stat:
-        path: "{{ ansible_env.HOME }}/.steam/steam/steam_dev.cfg"
+        path: "{{ ansible_facts.env.HOME }}/.steam/steam/steam_dev.cfg"
 
     - name: Start Steam once to generate config files
       when: steam_dev_stats.stat.exists == false
@@ -14,7 +14,7 @@
 
     - name: Fix steam download speed
       lineinfile:
-        path: "{{ ansible_env.HOME }}/.steam/steam/steam_dev.cfg"
+        path: "{{ ansible_facts.env.HOME }}/.steam/steam/steam_dev.cfg"
         search_string: "@nClientDownloadEnableHTTP2PlatformLinux"
         line: "@nClientDownloadEnableHTTP2PlatformLinux 0"
         create: true
@@ -25,6 +25,6 @@
 
     - name: Enable shaders to use all but 2 threads
       lineinfile:
-        path: "{{ ansible_env.HOME }}/.steam/steam/steam_dev.cfg"
+        path: "{{ ansible_facts.env.HOME }}/.steam/steam/steam_dev.cfg"
         search_string: "unShaderBackgroundProcessingThreads"
         line: "unShaderBackgroundProcessingThreads {{ nproc_output.stdout }}"
